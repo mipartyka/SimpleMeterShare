@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: simplemeter_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: simplemeter_db
+      POSTGRES_USER: meter_admin
+      POSTGRES_PASSWORD: supersecurepassword
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: simplemeter_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: adminpass
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+  pgadmin_data:
