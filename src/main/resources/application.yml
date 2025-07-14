@@ -1,10 +1,12 @@
 spring:
     application:
         name: simplemetershare
+
     datasource:
-        url: jdbc:postgresql://localhost:5432/simplemeter_db
-        username: meter_admin
-        password: supersecurepassword
+        url: jdbc:postgresql://localhost:5433/simplemeter_db
+        username: test_user
+        password: testpass
+
     jpa:
         hibernate:
             ddl-auto: update
@@ -12,3 +14,6 @@ spring:
         properties:
             hibernate:
                 format_sql: true
+server:
+    port: 8081
+
