@@ -1,5 +1,6 @@
 package com.sms.simplemetershare.entity;
 
+import com.sms.simplemetershare.entity.enummerate.InvoiceType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +20,7 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String type;
+    private InvoiceType type;
     private BigDecimal amount;
     private YearMonth billingMonth;
     private LocalDate issuedDate;

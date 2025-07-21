@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,4 +22,6 @@ public class Apartment {
     private Integer floor;
     @ManyToOne
     private Building building;
+    @ManyToMany
+    private List<Meter> meters;
 }
