@@ -16,6 +16,6 @@ public class SettlementController implements SettlementControllerApi {
 
     @Override
     public ResponseEntity<Settlement> getSettlementForYearMonth(YearMonth yearMonth, Integer apartmentId) {
-        return ResponseEntity.ok(settlementService.getSettlementForYearMonth(yearMonth, apartmentId));
+        return ResponseEntity.ok(settlementService.getSettlementForYearMonth(yearMonth.toString(), apartmentId));
     }
 }

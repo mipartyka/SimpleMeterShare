@@ -1,8 +1,8 @@
 package com.sms.simplemetershare.service.settlement.impl;
 
 import com.sms.simplemetershare.entity.*;
-import com.sms.simplemetershare.entity.enummerate.InvoiceType;
-import com.sms.simplemetershare.entity.enummerate.MeterType;
+import com.sms.simplemetershare.entity.enummerated.InvoiceType;
+import com.sms.simplemetershare.entity.enummerated.MeterType;
 import com.sms.simplemetershare.repository.ApartmentRepository;
 import com.sms.simplemetershare.repository.InvoiceRepository;
 import com.sms.simplemetershare.repository.MeterReadingRepository;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.YearMonth;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,14 +23,14 @@ public class SettlementServiceImpl implements SettlementService {
     private final InvoiceRepository invoiceRepository;
 
     @Override
-    public Settlement getSettlementForYearMonth(YearMonth yearMonth, Integer apartmentId) {
+    public Settlement getSettlementForYearMonth(String yearMonth, Integer apartmentId) {
         Apartment apartment = apartmentRepository.findById(apartmentId).orElse(null);
         if (Objects.isNull(apartment)) {
             throw new RuntimeException("Apartment with id " + apartmentId + " not found");
         }
         Building building = apartment.getBuilding();
         List<MeterReading> apartmentReadings =
-                meterReadingRepository.findAllByMeter_ApartmentsAndReadingMonth(List.of(apartment), yearMonth);
+                meterReadingRepository.findAllByMeter_ApartmentsInAndReadingMonth(List.of(apartment), yearMonth);
         List<MeterReading> buildingReadings =
                 meterReadingRepository.findAllByMeter_BuildingAndReadingMonth(building, yearMonth);
         List<Invoice> buildingInvoices =
@@ -50,7 +49,7 @@ public class SettlementServiceImpl implements SettlementService {
             List<MeterReading> buildingReadings,
             List<Invoice> buildingInvoices,
             Apartment apartment,
-            YearMonth yearMonth
+            String yearMonth
     ) {
         MeterReading apartmentHotWaterReading = getHotWaterReadingForApartment(apartmentReadings);
         BigDecimal usage = BigDecimal.valueOf(apartmentHotWaterReading.getReadingValue());
@@ -65,7 +64,7 @@ public class SettlementServiceImpl implements SettlementService {
             List<MeterReading> buildingReadings,
             List<Invoice> buildingInvoices,
             Apartment apartment,
-            YearMonth yearMonth,
+            String yearMonth,
             MeterReading apartmentHotWaterReading
     ) {
         MeterReading sharedMeterReading = findSharedHotWaterReading(buildingReadings, apartment);

@@ -10,7 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.YearMonth;
 
 @Data
 @AllArgsConstructor
@@ -23,5 +22,5 @@ public class CommonCost {
     private Integer id;
     private String description;
     private BigDecimal amount;
-    private YearMonth month;
+    private String month;
 }

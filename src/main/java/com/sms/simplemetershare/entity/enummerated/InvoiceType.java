@@ -1,4 +1,4 @@
-package com.sms.simplemetershare.entity.enummerate;
+package com.sms.simplemetershare.entity.enummerated;
 
 public enum InvoiceType {
     WATER,

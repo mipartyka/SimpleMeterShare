@@ -7,9 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
-import java.time.YearMonth;
 
 @Data
 @AllArgsConstructor
@@ -22,7 +19,7 @@ public class MeterReading {
     private Integer id;
     private LocalDate readingDate;
     private Double readingValue;
-    private YearMonth readingMonth;
+    private String readingMonth;
     @ManyToOne
     private Meter meter;
 }
